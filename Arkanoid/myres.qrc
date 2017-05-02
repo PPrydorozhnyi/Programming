@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/MyRes">
+        <file>arkanoid-ii.jpg</file>
+        <file>line_t_sinii.jpg</file>
+        <file>depositphotos_37981699-stock-photo-abstract-futuristic-background-blue-rectangles.jpg</file>
+        <file>11.ico</file>
+        <file>22.png</file>
+        <file>load.png</file>
+        <file>aqua-ball-icon-2_80x80.png</file>
+        <file>aqua-ball-icon-2_65x65.png</file>
+        <file>fon.jpg</file>
+        <file>fon2.jpg</file>
+        <file>icon-green-ball.png</file>
+        <file>w128h1281338911586notepad.png</file>
+        <file>transparent.png</file>
+        <file>close-icon-17.png</file>
+        <file>bright-yellow-brick-wall-texture-with-vertical-bricks.jpg</file>
+        <file>14.png</file>
+        <file>playing.png</file>
+        <file>results.jpg</file>
+        <file>double_down.png</file>
+        <file>double_up1600.png</file>
+    </qresource>
+</RCC>
