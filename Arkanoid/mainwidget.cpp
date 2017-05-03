@@ -47,11 +47,10 @@ void MainWidget::onLoadFinish()
     logger->write("Load finished");
 
     onMenu(true);
-    //connect(m_menu->button1, SIGNAL (onChoose(ActiveWindow&)), this, SLOT(onSwap(ActiveWindow&)));
-    connect(m_menu->button11, SIGNAL (clicked(bool)), this, SLOT (onSwap(bool)) );
-    connect(m_menu->button12, SIGNAL (clicked(bool)), this, SLOT (onResults(bool)) );
-    connect(m_menu->button13, SIGNAL (clicked(bool)), QApplication::instance(), SLOT (quit()) );
-    connect(m_menu->buttonForLog, SIGNAL (clicked(bool)), this, SLOT ( onShowLog(bool)));
+    connect(m_menu->button[0], SIGNAL (clicked(bool)), this, SLOT (onSwap(bool)) );
+    connect(m_menu->button[1], SIGNAL (clicked(bool)), this, SLOT (onResults(bool)) );
+    connect(m_menu->button[2], SIGNAL (clicked(bool)), QApplication::instance(), SLOT (quit()) );
+    connect(m_menu->button[3], SIGNAL (clicked(bool)), this, SLOT ( onShowLog(bool)));
 }
 
 

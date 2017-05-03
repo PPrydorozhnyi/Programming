@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     readlog.cpp \
     buttonwidget.cpp \
     labelwidget.cpp \
-    loglabel.cpp
+    loglabel.cpp \
+    buttonfake.cpp
 
 HEADERS  += gamewidget.h \
     game.h \
@@ -50,7 +51,8 @@ HEADERS  += gamewidget.h \
     readlog.h \
     buttonwidget.h \
     labelwidget.h \
-    loglabel.h
+    loglabel.h \
+    buttonfake.h
 
 FORMS    += gamewidget.ui \
     mainwidget.ui \
