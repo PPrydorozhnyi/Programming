@@ -132,11 +132,6 @@ void Menu::run()
 void Menu::paintEvent(QPaintEvent *)
 {
 
-    //QBrush br( button[0]->background, Qt::SolidPattern );
-    //br.setStyle(Qt::SolidPattern);
-
-    //for (int i = 0; i < n; i++)
-        //painterr[i] = new QPainter(this);
 
     QRect source(0, 0, 860, 660);
     QImage image(":/MyRes/bright-yellow-brick-wall-texture-with-vertical-bricks.jpg");
@@ -145,15 +140,12 @@ void Menu::paintEvent(QPaintEvent *)
     painter.drawImage(source,image);
 
     QPainter painter1(this);
-    //painterr[0]->setBrush( QBrush( QColor(128, 0, 255) , Qt::SolidPattern) );
 
     for (int i = 0; i < n; i++) {
     painter1.setPen( button[i]->pen );
     painter1.setBrush( QBrush( button[i]->background , Qt::SolidPattern) );
     painter1.drawRoundedRect(QRectF (button[i]->source), 15, 15);
     painter1.drawImage(QRectF (button[i]->iconPoint, button[i]->iconSize),button[i]->image);
-
-    //source.moveLeft(source.left() + 10);
 
     painter1.setFont(*buttonFont);
     painter1.drawText(QRectF (button[i]->iconPoint.x()+30, button[i]->iconPoint.y(), 200, 200), button[i]->string);

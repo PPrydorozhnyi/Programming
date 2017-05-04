@@ -1,3 +1,4 @@
+#pragma once
 #ifndef READLOG_H
 #define READLOG_H
 

@@ -37,7 +37,10 @@ SOURCES += main.cpp\
     buttonwidget.cpp \
     labelwidget.cpp \
     loglabel.cpp \
-    buttonfake.cpp
+    buttonfake.cpp \
+    paddle.cpp \
+    brick.cpp \
+    ball.cpp
 
 HEADERS  += gamewidget.h \
     game.h \
@@ -52,7 +55,10 @@ HEADERS  += gamewidget.h \
     buttonwidget.h \
     labelwidget.h \
     loglabel.h \
-    buttonfake.h
+    buttonfake.h \
+    paddle.h \
+    brick.h \
+    ball.h
 
 FORMS    += gamewidget.ui \
     mainwidget.ui \

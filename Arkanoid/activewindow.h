@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ACTIVEWINDOW_H
 #define ACTIVEWINDOW_H
 

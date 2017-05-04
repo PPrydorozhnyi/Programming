@@ -1,3 +1,4 @@
+#pragma once
 #ifndef LABELWIDGET_H
 #define LABELWIDGET_H
 

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef LOGLABEL_H
 #define LOGLABEL_H
 

@@ -20,5 +20,8 @@
         <file>results.jpg</file>
         <file>double_down.png</file>
         <file>double_up1600.png</file>
+        <file>paddle.png</file>
+        <file>brick.png</file>
+        <file>ball.jpg</file>
     </qresource>
 </RCC>

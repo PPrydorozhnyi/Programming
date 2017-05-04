@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BUTTONWIDGET_H
 #define BUTTONWIDGET_H
 

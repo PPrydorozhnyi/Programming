@@ -108,6 +108,7 @@ void ReadLog::scrollUp(bool)
 
 void ReadLog::paintEvent(QPaintEvent * event)
 {
+    Q_UNUSED(event)
 #if 0
     qDebug () << event->region ();
     QRectF source(0.0, 0.0, 860, 660);
@@ -119,8 +120,3 @@ void ReadLog::paintEvent(QPaintEvent * event)
 #endif
 }
 
-/*void ReadLog::showLog(QString text)
-{
-    label2->setText(text);
-    label2->show();
-}*/

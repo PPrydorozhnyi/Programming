@@ -84,7 +84,7 @@ void MainWidget::onSwap(bool)
     if (!m_playing) {
     m_playing = new Playing(this);
     connect(m_playing, SIGNAL (forLogger(const QString &)), logger, SLOT (write(const QString &)) );
-    connect(m_playing->button, SIGNAL (clicked(bool)), this, SLOT (onMenu(bool)));
+    connect(m_playing, SIGNAL (clicked(bool)), this, SLOT (onMenu(bool)));
     }
     strategy(*m_playing);
     qDebug() << "playing";

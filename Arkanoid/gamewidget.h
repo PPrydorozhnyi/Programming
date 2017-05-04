@@ -1,3 +1,4 @@
+#pragma once
 #ifndef GAMEWIDGET_H
 #define GAMEWIDGET_H
 

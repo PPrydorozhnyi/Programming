@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BUTTONFAKE_H
 #define BUTTONFAKE_H
 

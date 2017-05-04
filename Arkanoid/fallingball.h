@@ -1,3 +1,4 @@
+#pragma once
 #ifndef FALLINGBALL_H
 #define FALLINGBALL_H
 
