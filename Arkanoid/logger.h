@@ -3,7 +3,7 @@
 #define LOGGER_H
 
 #include <QObject>
-#include <QPlainTextEdit>
+//#include <QPlainTextEdit>
 #include <QFile>
 #include <QTextStream>
 #include <QDateTime>

@@ -13,6 +13,9 @@
 #include <QPaintEvent>
 #include <QTimerEvent>
 #include <QKeyEvent>
+#include <QFile>
+#include <QTextStream>
+#include <QDateTime>
 
 
 namespace Ui {
@@ -31,12 +34,16 @@ public:
 private:
 
     Ui::Playing *ui;
+    QFile *file;
 
     int m_x;
     int m_timerId;
+    int m_score;
     QImage m_background;
     QImage m_victory;
     QImage m_over;
+    QString scoreS;
+    QString m_fileName;
     static const int AMOUNT_OF_BRICKS = 35;
     static const int DELAY = 10;
     static const int BOTTOM_EDGE = 700;
@@ -52,12 +59,14 @@ private:
     void drawObjects(QPainter *);
     void onFinishGame(QPainter *, QImage &);
     void onPause(QPainter *, QString);
+    void drawScore(QPainter *, QString);
     void moveObjects();
     void pauseGame();
     void stopGame();
     void startGame();
     void flawlessVictory();
     void checkControls();
+    void writeResults(int);
 
 protected:
     void paintEvent(QPaintEvent *event) override;

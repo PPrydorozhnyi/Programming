@@ -48,17 +48,17 @@ void Logger::write(const QString &value)
     if (m_date)
         text = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss ") + text;
 
-    qDebug() << text;
+    //qDebug() << text;
 
     QTextStream out(file);
     out.setCodec("UTF-8");
 
     if (file) {
         out << text;
-        qDebug() << "wtf";
+        //qDebug() << "wtf";
     }
 
-    qDebug() << "ee";
+    //qDebug() << "ee";
 
 }
 

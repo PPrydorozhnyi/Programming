@@ -25,9 +25,19 @@ Playing::Playing(QWidget *parent) :
     m_gameStated = false;
     m_gameWon = false;
     m_paused = false;
+    m_fileName = "score.txt";
 
     ball = new Ball();
     paddle = new Paddle();
+
+    if (!m_fileName.isEmpty()) {
+
+        file = new QFile();
+        file->setFileName(m_fileName);
+        if (!file->open(QIODevice::Append | QIODevice::Text))
+            qDebug()<< "can't open file for write results";
+
+    }
 
     int counter = 0;
 
@@ -65,7 +75,6 @@ void Playing::paintEvent(QPaintEvent *)
     painter.drawImage(QRect(0, 0, 860, 660), m_background);
 
     if (m_gameOver) {
-        painter.setPen(Qt::white);
         onFinishGame(&painter, m_over);
     }
     else if (m_gameWon) {
@@ -74,9 +83,12 @@ void Playing::paintEvent(QPaintEvent *)
     else if(m_paused) {
         drawObjects(&painter);
         onPause(&painter, "Game paused");
-    }
-    else
+    } else
         drawObjects(&painter);
+
+    scoreS = QString("Score: %1").arg(m_score);
+    drawScore(&painter, scoreS);
+    //qDebug() << m_score;
 
 }
 
@@ -86,6 +98,7 @@ void Playing::onFinishGame(QPainter *painter, QImage &image) {
 
     //qDebug() << "Game finished";
     forLogger("Game finished");
+    writeResults(m_score);
 
 }
 
@@ -105,6 +118,16 @@ void Playing::onPause(QPainter *painter, QString message)
     painter->drawText(-textWidth / 2, 0, message);
 
     forLogger("Game paused");
+}
+
+void Playing::drawScore(QPainter *painter, QString message)
+{
+    QFont font("Courier", 20, QFont::DemiBold);
+    painter->setFont(font);
+
+    painter->setPen(Qt::white/*QColor(255, 215, 0)*/);
+
+    painter->drawText(650 , 650, message);
 }
 
 void Playing::drawObjects(QPainter *painter) {
@@ -206,15 +229,8 @@ void Playing::startGame() {
 
     if (!m_gameStated) {
 
-        ball->resetState();
-        paddle->resetState();
-
-        for (int i = 0; i < AMOUNT_OF_BRICKS; i++)
-            bricks[i]->setDestroyed(false);
-
-        m_gameOver = false;
-        m_gameWon = false;
         m_gameStated = true;
+
         m_timerId = startTimer(DELAY);
 
         //qDebug() << "Game started";
@@ -386,6 +402,7 @@ void Playing::checkControls() {
                     }
 
                     bricks[i]->setDestroyed(true);
+                    m_score += 10;
 
                     //qDebug() << "Brick destroyed";
                     forLogger("Brick destroyed");
@@ -398,7 +415,32 @@ void Playing::checkControls() {
 
 }
 
+void Playing::writeResults(int value)
+{
+    QString text = QString("%1").arg(value);
+    text += '\n';
+    text = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss ") + text;
+
+    //qDebug() << text;
+
+    QTextStream out(file);
+    out.setCodec("UTF-8");
+
+    if (file) {
+        out << text;
+    }
+
+}
+
 void Playing::run()
 {
+    ball->resetState();
+    paddle->resetState();
 
+    for (int i = 0; i < AMOUNT_OF_BRICKS; i++)
+        bricks[i]->setDestroyed(false);
+
+    m_score = 0;
+    m_gameOver = false;
+    m_gameWon = false;
 }
