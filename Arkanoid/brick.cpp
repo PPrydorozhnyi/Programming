@@ -4,7 +4,9 @@
 Brick::Brick(int x, int y)
 {
     m_image.load(":/MyRes/brick.png");
-    m_rect = m_image.rect();
+
+    m_rect = QRect(0,0,80,35);
+    //m_rect = m_image.rect();
 
     //his exactly position on the widget
     m_rect.translate(x, y);

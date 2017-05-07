@@ -8,7 +8,8 @@ Ball::Ball()
 
     m_image.load(":/MyRes/ball.jpg");
 
-    m_rect = m_image.rect();
+    m_rect = QRect(0,0,30,30);
+    //m_rect = m_image.rect();
     resetState();
 }
 
@@ -21,16 +22,22 @@ void Ball::autoMove() {
 
     m_rect.translate(m_x, m_y);
 
-    if (m_rect.left() == 0) {
+    if (m_rect.x() == 0) {
+
         m_x = 1;
+
     }
 
     if (m_rect.right() == RIGHT_EDGE) {
+
         m_x = -1;
+
     }
 
     if (m_rect.y() == 0) {
+
         m_y = 1;
+
     }
 }
 

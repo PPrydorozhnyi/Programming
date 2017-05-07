@@ -22,8 +22,8 @@ private:
     QImage m_image;
     QRect m_rect;
     int dx;
-    static const int INITIAL_X = 200;
-    static const int INITIAL_Y = 360;
+    static const int INITIAL_X = 450;
+    static const int INITIAL_Y = 585;
 };
 
 #endif // PADDLE_H

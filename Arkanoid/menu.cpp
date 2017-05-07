@@ -142,13 +142,14 @@ void Menu::paintEvent(QPaintEvent *)
     QPainter painter1(this);
 
     for (int i = 0; i < n; i++) {
-    painter1.setPen( button[i]->pen );
-    painter1.setBrush( QBrush( button[i]->background , Qt::SolidPattern) );
-    painter1.drawRoundedRect(QRectF (button[i]->source), 15, 15);
-    painter1.drawImage(QRectF (button[i]->iconPoint, button[i]->iconSize),button[i]->image);
 
-    painter1.setFont(*buttonFont);
-    painter1.drawText(QRectF (button[i]->iconPoint.x()+30, button[i]->iconPoint.y(), 200, 200), button[i]->string);
+        painter1.setPen( button[i]->pen );
+        painter1.setBrush( QBrush( button[i]->background , Qt::SolidPattern) );
+        painter1.drawRoundedRect(QRectF (button[i]->source), 15, 15);
+        painter1.drawImage(QRectF (button[i]->iconPoint, button[i]->iconSize),button[i]->image);
+
+        painter1.setFont(*buttonFont);
+        painter1.drawText(QRectF (button[i]->iconPoint.x()+30, button[i]->iconPoint.y(), 200, 200), button[i]->string);
     }
 
 }
