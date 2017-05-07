@@ -6,7 +6,7 @@ Ball::Ball()
     m_x = 1;
     m_y = -1;
 
-    m_image.load(":/MyRes/ball.jpg");
+    m_image.load(":/MyRes/ball.png");
 
     m_rect = QRect(0,0,30,30);
     //m_rect = m_image.rect();

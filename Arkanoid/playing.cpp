@@ -11,6 +11,12 @@ Playing::Playing(QWidget *parent) :
     resize(860,660);
     setFixedSize(860,660);
 
+    //QRect source(0, 0, 860, 660);
+    m_background.load(":/MyRes/cloud-example.jpg");
+    //m_background.scaled(860, 660);
+    m_victory.load(":/MyRes/victory.png");
+    m_over.load(":/MyRes/game_over.jpg");
+
     //button = new ButtonWidget(this,  QStringLiteral ("Menu"));
     //button->setGeometry(700, 285, 60, 50 );
 
@@ -31,7 +37,7 @@ Playing::Playing(QWidget *parent) :
             counter++;
         }
 
-    setFocusPolicy(Qt::ClickFocus);
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 
@@ -51,26 +57,41 @@ Playing::~Playing()
 
 void Playing::paintEvent(QPaintEvent *)
 {
-    //QRectF source(0.0, 0.0, 860, 660);
-    //QImage image(":/MyRes/playing.png");
 
     //QPainter painter1(this);
     //painter1.drawImage(source,image);
 
     QPainter painter(this);
+    painter.drawImage(QRect(0, 0, 860, 660), m_background);
 
-    if (m_gameOver)
-        onFinishGame(&painter, "Game over");
-    else if (m_gameWon)
-        onFinishGame(&painter, "You Won");
+    if (m_gameOver) {
+        painter.setPen(Qt::white);
+        onFinishGame(&painter, m_over);
+    }
+    else if (m_gameWon) {
+        onFinishGame(&painter, m_victory);
+    }
+    else if(m_paused) {
+        drawObjects(&painter);
+        onPause(&painter, "Game paused");
+    }
     else
         drawObjects(&painter);
 
 }
 
-void Playing::onFinishGame(QPainter *painter, QString message) {
+void Playing::onFinishGame(QPainter *painter, QImage &image) {
 
-    QFont font("Courier", 15, QFont::DemiBold);
+    painter->drawImage(QRect(0, 0, 860, 660), image);
+
+    //qDebug() << "Game finished";
+    forLogger("Game finished");
+
+}
+
+void Playing::onPause(QPainter *painter, QString message)
+{
+    QFont font("Courier", 20, QFont::DemiBold);
     QFontMetrics fontM(font);
     int textWidth = fontM.width(message);
 
@@ -78,11 +99,12 @@ void Playing::onFinishGame(QPainter *painter, QString message) {
     int h = height();
     int w = width();
 
+    painter->setPen(QColor(237, 118, 14));
+
     painter->translate(QPoint(w / 2, h / 2));
     painter->drawText(-textWidth / 2, 0, message);
 
-    qDebug() << "Game finished";
-
+    forLogger("Game paused");
 }
 
 void Playing::drawObjects(QPainter *painter) {
@@ -105,7 +127,7 @@ void Playing::timerEvent(QTimerEvent * event)
     Q_UNUSED(event);
 
     moveObjects();
-    checkCollisions();
+    checkControls();
     repaint();
 
 }
@@ -195,7 +217,8 @@ void Playing::startGame() {
         m_gameStated = true;
         m_timerId = startTimer(DELAY);
 
-        qDebug() << "Game started";
+        //qDebug() << "Game started";
+        forLogger("Game started");
 
     }
 
@@ -205,17 +228,27 @@ void Playing::pauseGame() {
 
     if (m_paused) {
 
-        m_timerId = startTimer(DELAY);
         m_paused = false;
+        repaint();
+        m_timerId = startTimer(DELAY);
 
-        qDebug() << "Game unpaused";
+        //qDebug() << "Game unpaused";
+        forLogger("Game unpaused");
 
     } else {
 
         m_paused = true;
+#if 0
+        for (int i = 0; i < AMOUNT_OF_BRICKS; i++)
+
+            bricks[i]->setDestroyed(true);
+#endif
+
+        repaint();
         killTimer(m_timerId);
 
-        qDebug() << "Game paused";
+        //qDebug() << "Game paused";
+        forLogger("Game paused");
 
     }
 
@@ -227,7 +260,8 @@ void Playing::stopGame() {
     m_gameOver = true;
     m_gameStated = false;
 
-    qDebug() << "Game stoped";
+    //qDebug() << "Game stoped";
+    forLogger("Game stoped");
 
 }
 
@@ -237,11 +271,12 @@ void Playing::flawlessVictory() {
     m_gameWon = true;
     m_gameStated = false;
 
-    qDebug() << "Victory";
+    //qDebug() << "Victory";
+    forLogger("Victory");
 
 }
 
-void Playing::checkCollisions() {
+void Playing::checkControls() {
 
     if (ball->getRect().bottom() > BOTTOM_EDGE)
 
@@ -311,6 +346,9 @@ void Playing::checkCollisions() {
                 int ballY = ball->getRect().y();
                 int ballHeight = ball->getRect().height();
 
+                //int brickHeight = bricks[i]->getRect().height();
+                //int brickY = bricks[i]->getRect().y();
+
                 //before intersects for ball, intersects points
                 QPoint pointLeft1(ballX - 1, ballY);
                 QPoint pointLeft2(ballX - 1, ballY + ballHeight);
@@ -322,7 +360,7 @@ void Playing::checkCollisions() {
                 QPoint pointBottom2(ballX + ballWidth, ballY + ballHeight + 1);
 
                 if (!bricks[i]->isDestroyed()) {
-                    if (bricks[i]->getRect().contains(pointRight1) || bricks[i]->getRect().contains(pointRight2)) {
+                    if ( bricks[i]->getRect().contains(pointRight1) || bricks[i]->getRect().contains(pointRight2)  ) {
 
                         ball->setX(-1);
                         qDebug() << "pointRight";
@@ -350,6 +388,7 @@ void Playing::checkCollisions() {
                     bricks[i]->setDestroyed(true);
 
                     //qDebug() << "Brick destroyed";
+                    forLogger("Brick destroyed");
                 }
 
 

@@ -22,6 +22,10 @@
         <file>double_up1600.png</file>
         <file>paddle.png</file>
         <file>brick.png</file>
-        <file>ball.jpg</file>
+        <file>ball.png</file>
+        <file>blue_ball_png_by_shadowmana-d5iii5o.png</file>
+        <file>cloud-example.jpg</file>
+        <file>game_over.jpg</file>
+        <file>victory.png</file>
     </qresource>
 </RCC>

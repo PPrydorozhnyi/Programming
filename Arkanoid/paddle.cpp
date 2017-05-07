@@ -20,7 +20,7 @@ void Paddle::setDeltaX(int x) {
 
     if (x < 0 && m_rect.x() <= 0)
         dx = 0;
-    else if (x > 0 && m_rect.x() >= 800)
+    else if (x > 0 && (m_rect.x() + m_rect.width()) >= 860)
         dx = 0;
     else
         dx = x;

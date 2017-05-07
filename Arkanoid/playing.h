@@ -34,6 +34,9 @@ private:
 
     int m_x;
     int m_timerId;
+    QImage m_background;
+    QImage m_victory;
+    QImage m_over;
     static const int AMOUNT_OF_BRICKS = 35;
     static const int DELAY = 10;
     static const int BOTTOM_EDGE = 700;
@@ -47,13 +50,14 @@ private:
     bool m_paused;
 
     void drawObjects(QPainter *);
-    void onFinishGame(QPainter *, QString);
+    void onFinishGame(QPainter *, QImage &);
+    void onPause(QPainter *, QString);
     void moveObjects();
     void pauseGame();
     void stopGame();
     void startGame();
     void flawlessVictory();
-    void checkCollisions();
+    void checkControls();
 
 protected:
     void paintEvent(QPaintEvent *event) override;
