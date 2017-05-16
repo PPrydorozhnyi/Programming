@@ -379,26 +379,26 @@ void Playing::checkControls() {
                     if ( bricks[i]->getRect().contains(pointRight1) || bricks[i]->getRect().contains(pointRight2)  ) {
 
                         ball->setX(-1);
-                        qDebug() << "pointRight";
+                        //qDebug() << "pointRight";
 
                     }
 
                     else if (bricks[i]->getRect().contains(pointLeft1) || bricks[i]->getRect().contains(pointLeft2)) {
 
                         ball->setX(1);
-                        qDebug() << "pointLeft";
+                        //qDebug() << "pointLeft";
                     }
 
                     if (bricks[i]->getRect().contains(pointTop1) || bricks[i]->getRect().contains(pointTop2)) {
 
                         ball->setY(1);
-                        qDebug() << "pointTop";
+                        //qDebug() << "pointTop";
                     }
 
                     else if (bricks[i]->getRect().contains(pointBottom1) || bricks[i]->getRect().contains(pointBottom2)) {
 
                         ball->setY(-1);
-                        qDebug() << "pointBottom";
+                        //qDebug() << "pointBottom";
                     }
 
                     bricks[i]->setDestroyed(true);
@@ -417,9 +417,9 @@ void Playing::checkControls() {
 
 void Playing::writeResults(int value)
 {
-    QString text = QString("%1").arg(value);
-    text += '\n';
-    text = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss ") + text;
+    QString text = QString("%1\n").arg(value);
+    //text += '\n';
+    //text = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss ") + text;
 
     //qDebug() << text;
 

@@ -8,7 +8,7 @@ Ball::Ball()
 
     m_image.load(":/MyRes/ball.png");
 
-    m_rect = QRect(0,0,30,30);
+    m_rect = QRect(0, 0, 30, 30);
     //m_rect = m_image.rect();
     resetState();
 }

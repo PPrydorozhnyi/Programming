@@ -46,7 +46,7 @@ private:
     QString m_fileName;
     static const int AMOUNT_OF_BRICKS = 35;
     static const int DELAY = 10;
-    static const int BOTTOM_EDGE = 700;
+    static const int BOTTOM_EDGE = 680;
     Ball *ball;
     Paddle *paddle;
     Brick *bricks[AMOUNT_OF_BRICKS];
