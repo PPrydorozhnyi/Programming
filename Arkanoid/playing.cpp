@@ -204,6 +204,14 @@ void Playing::keyPressEvent(QKeyEvent * event)
         cheatWin();
         break;
 
+    case Qt::Key_R:
+
+        if (!m_gameStated)
+
+            emit toResults(true);
+
+        break;
+
     default:
 
         QWidget::keyPressEvent(event);

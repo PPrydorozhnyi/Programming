@@ -58,8 +58,6 @@ public slots:
     void onUp(bool);
     void onDown(bool);
 
-//signals:
-    //void created(const QString &value);
 };
 
 #endif // RESULTS_H

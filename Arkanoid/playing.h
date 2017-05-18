@@ -77,6 +77,7 @@ protected:
 
 signals:
     void clicked(bool);
+    void toResults(bool);
 
     // ActiveWindow interface
 public:

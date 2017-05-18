@@ -72,7 +72,8 @@ void MainWidget::onMenu(bool)
     if (!m_menu) {
         m_menu = new Menu(this);
 
-        connect(m_menu, SIGNAL (forLogger(const QString &)), logger, SLOT (write(const QString &)) );
+        connect(m_menu, SIGNAL (forLogger(const QString &)), logger,
+                SLOT (write(const QString &)) );
     }
     strategy(*m_menu);
     qDebug() << "menu";
@@ -83,8 +84,12 @@ void MainWidget::onSwap(bool)
 {
     if (!m_playing) {
     m_playing = new Playing(this);
-    connect(m_playing, SIGNAL (forLogger(const QString &)), logger, SLOT (write(const QString &)) );
-    connect(m_playing, SIGNAL (clicked(bool)), this, SLOT (onMenu(bool)));
+    connect(m_playing, SIGNAL (forLogger(const QString &)), logger,
+            SLOT (write(const QString &)) );
+    connect(m_playing, SIGNAL (clicked(bool)),
+            this, SLOT (onMenu(bool)));
+    connect(m_playing, SIGNAL(toResults(bool)),
+            this, SLOT(onResults(bool)));
     }
     strategy(*m_playing);
     qDebug() << "playing";
@@ -96,7 +101,8 @@ void MainWidget::onResults(bool)
     if (!m_results) {
     m_results = new Results(this);
     connect(m_results, SIGNAL (forLogger(const QString &)), logger, SLOT (write(const QString &)) );
-    connect(m_results->button, SIGNAL (clicked(bool)), this, SLOT (onMenu(bool)));
+    connect(m_results->button, SIGNAL (clicked(bool)),
+            this, SLOT (onMenu(bool)));
     }
     strategy(*m_results);
     qDebug() << "results";
@@ -106,7 +112,8 @@ void MainWidget::onShowLog(bool)
 {
     if (!m_readLog) {
     m_readLog = new ReadLog(this, fileName);
-    connect(m_readLog->buttonToMenu, SIGNAL (clicked(bool)), this, SLOT (onMenu(bool)));
+    connect(m_readLog->buttonToMenu, SIGNAL (clicked(bool)),
+            this, SLOT (onMenu(bool)));
 }
     //m_readLog->showLog(logger->read());
     strategy(*m_readLog);
