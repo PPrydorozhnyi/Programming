@@ -67,6 +67,7 @@ private:
     void flawlessVictory();
     void checkControls();
     void writeResults(int);
+    void cheatWin();
 
 protected:
     void paintEvent(QPaintEvent *event) override;

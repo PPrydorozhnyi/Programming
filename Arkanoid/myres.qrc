@@ -27,5 +27,9 @@
         <file>cloud-example.jpg</file>
         <file>game_over.jpg</file>
         <file>victory.png</file>
+        <file>turquoise.jpg</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>turquoise.jpg</file>
     </qresource>
 </RCC>

@@ -37,7 +37,7 @@ void MainWidget::running()
     //logger->write("Hello Qt");
     //m_gwidget = new GameWidget(this);
     //m_gwidget->show();
-    QTimer::singleShot(1/*10000*/, this, SLOT(onLoadFinish()));
+    QTimer::singleShot( 1 /*10000*/, this, SLOT(onLoadFinish()));
 }
 
 void MainWidget::onLoadFinish()
@@ -126,5 +126,6 @@ void MainWidget::strategy(ActiveWindow &action)
     logger->write(strcat(strcpy(cont, "Curent widget is " ), typeid(*current).name()) );
     //action.resize(860,660);
     //action.setFixedSize(860,660);
+    action.update();
     action.show();
 }

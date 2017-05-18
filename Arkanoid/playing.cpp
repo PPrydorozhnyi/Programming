@@ -199,6 +199,10 @@ void Playing::keyPressEvent(QKeyEvent * event)
         emit clicked(true);
 
         break;
+    case Qt::Key_C:
+
+        cheatWin();
+        break;
 
     default:
 
@@ -429,6 +433,17 @@ void Playing::writeResults(int value)
     if (file) {
         out << text;
     }
+
+}
+
+void Playing::cheatWin()
+{
+
+    m_score = 350;
+
+    for (int i = 0; i < AMOUNT_OF_BRICKS; i++)
+
+        bricks[i]->setDestroyed(true);
 
 }
 
