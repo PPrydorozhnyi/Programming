@@ -62,6 +62,7 @@ void Logger::write(const QString &value)
 
 }
 
+
 #if 0
 
 QString Logger::read() {

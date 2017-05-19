@@ -1,6 +1,5 @@
 #include "results.h"
 #include "ui_results.h"
-#include <QDebug>
 
 Results::Results(QWidget *parent) :
     ActiveWindow(parent),
@@ -22,6 +21,7 @@ Results::Results(QWidget *parent) :
     resultsHeight = 594;
     currentPos = 0;
     toPos = 10;
+    lastCount = 0;
     button->setGeometry(795, 328, 60, 50 );
     buttonUp->setGeometry(795, 56, 60, 50 );
     buttonDown->setGeometry(795, 6 + resultsHeight, 60, 50 );
@@ -77,10 +77,10 @@ void Results::paintEvent(QPaintEvent *)
     painter.drawImage(source,image);
 
     readScore();
+    qDebug() << list->count();
     drawScore(&painter);
     drawTable(&painter);
     //label->setText(*list->back());
-    //qDebug() << list->back();
     //qDebug() << 0;
 
 }
@@ -121,9 +121,12 @@ void Results::drawScore(QPainter *painter) {
     painter->setPen(pen);
     painter->setFont(*font);
 
-    //list->count() < currentPos + 10 ? toPos = list->count() : toPos = currentPos + 10;
+    list->count() < currentPos + 10 ? toPos = list->count() : toPos = currentPos + 10;
+    //if (list->count() < 10)
+        //toPos = list->count();
 
 
+    if (!list->isEmpty())
     for (int i = currentPos , j = 0; i < toPos; ++i, ++j) {
 
         textWidth = fontM1->width(QString::number(currentPos + 1));
@@ -146,6 +149,16 @@ void Results::readScore() {
 
     }
 
+    if (list->count() != lastCount) {
+
+        qDebug() << "quicksort";
+
+        quickSort(list, 0 , list->count() - 1);
+        //list->swap(0, 1);
+        lastCount = list->count();
+
+    }
+
 }
 
 void Results::onUp(bool) {
@@ -155,15 +168,21 @@ void Results::onUp(bool) {
     } else if (0 > currentPos - 10) {
 
         currentPos = 0;
-        toPos = 10;
+        if (list->count() < 10)
+            toPos = list->count();
+        else
+            toPos = 10;
 
     } else {
 
-        currentPos = toPos - 20;
+        if (list->count() - 20 >= 0)
+            currentPos = toPos - 20;
+        else
+            currentPos = 0;
         toPos = toPos - 10;
 
     }
-    qDebug() << toPos;
+    //qDebug() << toPos;
     update();
 
 }
@@ -183,7 +202,7 @@ void Results::onDown(bool) {
         toPos = toPos + 10;
 
     }
-    qDebug() << toPos;
+    //qDebug() << toPos;
     update();
 
 }

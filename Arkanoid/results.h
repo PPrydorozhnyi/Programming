@@ -9,6 +9,7 @@
 #include <iostream>
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
 
 namespace Ui {
 class Results;
@@ -36,6 +37,7 @@ private:
     int currentPos;
     int toPos;
     int textWidth;
+    int lastCount;
     QFont *font;
     QFont *fontR;
     QList<int> *list;
@@ -51,12 +53,42 @@ private:
     void drawScore(QPainter *);
     void readScore();
 
+    template<class T>
+    void quickSort (QList<T> *listt, int left, int right) {
+        int i = left, j = right;
+            T pivot = listt->at(left + (right - left) / 2);
+            //qDebug() << pivot;
+
+            // partition
+            while (i <= j) {
+                while (listt->at(i) > pivot)
+                i++;
+                while (listt->at(j) < pivot)
+                j--;
+                if (i <= j) {
+                    //tmp = list->at(i);
+                    listt->swap(i, j);
+                    //qDebug() << "swap";
+                    i++;
+                    j--;
+                }
+            };
+
+            // recursion
+            if (left < j)
+            quickSort(listt, left, j);
+            if (i < right)
+            quickSort(listt, i, right);
+    }
+
+
 protected:
     void paintEvent(QPaintEvent *event) override;
 
 public slots:
     void onUp(bool);
     void onDown(bool);
+
 
 };
 
